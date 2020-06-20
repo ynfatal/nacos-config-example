@@ -1,0 +1,49 @@
+# 新建 bootstrap.yml 文件如果图标显示不是叶子 Open Module Settings -> Modules -> Spring -> 叶子 -> +
+# 请参考 https://blog.csdn.net/weixin_42950079/article/details/103315342
+# 这里只测试 config，没有配置 discovery，所以 nacos 上找不到这个服务的
+spring:
+  application:
+    name: nacos-config-example
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      # nacos config 配置优先级：有 profiles 的优先于没有的，有文件扩展名的优先于没有的，带 ${spring.application.name} 的优先于不带的，extension 的优先于 share 的。（已测试）
+      # nacos config 配置优先于jar包内部配置，比如jar包内的 application.yml （已测试）
+        # ${prefix} - ${spring.profiles.active} . ${file-extension}
+        # ${prefix} . ${file-extension}
+        # ${prefix} . ${file-extension}
+        # ${prefix}
+        # extension-configs[n]  在 extension-configs 中 n 的值越大，优先级越高
+        # extension-configs[1]
+        # share-configs[n]  在 share-configs 中 n 的值越大，优先级越高
+        # share-configs[1]
+        # 从上到下，优先级从高到底
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        # 默认为 DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        # shared-configs 和 extension-configs 都是对应同一个类 com.alibaba.cloud.nacos.NacosConfigProperties.Config
+        #   其中 refresh 属性表示是否支持动态刷新，默认不支持。通过自定义的 Data Id 配置，既可以解决多个应用间配置共享的问题，
+        #   又可以支持一个应用有多个配置文件。
+        shared-configs:
+          # 行内写法
+#          - {dataId: common.yaml, group: DEFAULT_GROUP, refresh: true}
+          # 普通写法
+          - dataId: common.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+        extension-configs:
+          - dataId: extension.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+      # nacos auth
+      username: nacos
+      password: 123456
+
+
+user:
+  weight: 70
+  hobby: basketball
+
