@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 参考官方 WIKI https://github.com/alibaba/spring-cloud-alibaba/wiki/Nacos-config
  * @author Fatal
- * @date 2020/6/17
+ * @date 2020/6/18
  */
 @RestController
 @RefreshScope
