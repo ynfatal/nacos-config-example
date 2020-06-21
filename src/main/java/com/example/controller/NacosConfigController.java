@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RefreshScope
 // 默认查找配置文件的规则后面做笔记，根据官网和alibaba文档。有默认规则的，除了这个默认文件之外你还可以添加额外的配置文件
-// 文件名结果可以参考控制台，搜：c.a.nacos.client.config.impl.CacheData
+// 文件名结果可以参考控制台，搜：com.alibaba.nacos.client.config.impl.CacheData
 public class NacosConfigController {
 
     @Value("${user.id}")
