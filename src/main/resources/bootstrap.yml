@@ -24,7 +24,8 @@ spring:
         file-extension: yaml
         # 默认为 DEFAULT_GROUP
         group: DEFAULT_GROUP
-        # shared-configs 和 extension-configs 都是对应同一个类 com.alibaba.cloud.nacos.NacosConfigProperties.Config
+        # shared-configs 和 extension-configs 的底层都是基于 com.alibaba.cloud.nacos.NacosConfigProperties.Config 实现，
+        # 它们的区别是为了更清晰的区分`共享配置`和`扩展配置`两配置项的值（因为底层实现一样，extension-configs 也能当成共享配置用，但没必要）
         #   其中 refresh 属性表示是否支持动态刷新，默认不支持。通过自定义的 Data Id 配置，既可以解决多个应用间配置共享的问题，
         #   又可以支持一个应用有多个配置文件。
         shared-configs:
@@ -42,7 +43,7 @@ spring:
       username: nacos
       password: 123456
 
-
+# jar 外部配置优先于内部配置
 user:
   weight: 70
   hobby: basketball
